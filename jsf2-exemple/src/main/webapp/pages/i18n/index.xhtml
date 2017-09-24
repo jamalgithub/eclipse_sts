@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title><h:outputText value="#{msg.title}"/></title>
+</h:head>
+<h:body>
+	<h:form>
+       <h:outputLink value="../../index.xhtml" >Page d'acceuil</h:outputLink>
+    </h:form>	
+	<h2><h:outputText value="#{msg.h2_label}"/></h2>
+	<h:form>
+	   <h3><h:outputText value="#{msg.greeting}" /></h3>
+	   <h:panelGrid columns="2"> 
+	      Language : 
+	      <h:selectOneMenu value="#{localBean.locale}" onchange="submit()"
+	         valueChangeListener="#{localBean.localeChanged}">
+	         <f:selectItems value="#{localBean.countries}" /> 
+	      </h:selectOneMenu> 
+	   </h:panelGrid> 
+	</h:form>
+</h:body>
+</html>

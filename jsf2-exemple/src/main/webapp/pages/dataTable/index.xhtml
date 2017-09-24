@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<title>JSF tutorial</title>		
+    <h:outputStylesheet library="css" name="style.css"  />
+</h:head> 
+<h:body>
+	
+	<h:outputLink value="../../index.xhtml" >Page d'acceuil</h:outputLink>
+	 
+	<h2>DataTable Example</h2>
+	<h:form>		
+		
+		<h:dataTable value="#{dataTableBean.employees}" var="employee"
+         styleClass="employeeTable" headerClass="employeeTableHeader"
+         rowClasses="employeeTableOddRow,employeeTableEvenRow" footerClass="employeeTableFooter">
+			<h:column>    				
+			   <f:facet name="header">Name</f:facet>    				
+			   <h:inputText value="#{employee.name}" size="10" rendered="#{employee.canEdit}" />
+			   <h:outputText value="#{employee.name}" rendered="#{not employee.canEdit}" />
+			</h:column>
+			<h:column>
+			   <f:facet name="header">Department</f:facet>
+			   <h:inputText value="#{employee.department}" size="20" rendered="#{employee.canEdit}" />
+			   <h:outputText value="#{employee.department}" rendered="#{not employee.canEdit}" />
+			</h:column>
+			<h:column>
+			   <f:facet name="header">Age</f:facet>
+			   <h:inputText value="#{employee.age}" size="5" rendered="#{employee.canEdit}" />
+			   <h:outputText value="#{employee.age}" rendered="#{not employee.canEdit}" />
+			</h:column>
+			<h:column>
+			   <f:facet name="header">Salary</f:facet>
+			   <h:inputText value="#{employee.salary}" size="5" rendered="#{employee.canEdit}" />
+			   <h:outputText value="#{employee.salary}" rendered="#{not employee.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Edit</f:facet>
+				<h:commandLink value="Edit" immediate="true" action="#{dataTableBean.editEmployee(employee)}" rendered="#{not employee.canEdit}" />
+			</h:column>
+			<h:column> 
+    			<f:facet name="header">Delete</f:facet> 
+    			<h:commandLink value="Delete" action="#{dataTableBean.deleteEmployee}" >
+    				<f:setPropertyActionListener target="#{dataTableBean.employee}" value="#{employee}" />
+    			</h:commandLink>
+    			<f:facet name="footer"><h:commandLink value="Add" action="#{dataTableBean.add}" /></f:facet>
+    		</h:column>
+		</h:dataTable>  
+		<br/>
+		<h:commandButton value="Save Employees" action="#{dataTableBean.saveEmployees}"  rendered="#{dataTableBean.canSave}"/>
+					
+	</h:form>
+	
+	<h:panelGroup rendered="#{dataTableBean.canAdd}">
+	<h:form>
+		<h3>Add Employee</h3>
+		<hr/>
+		<table>
+			<tr>
+			      <td>Name :</td>
+			      <td><h:inputText id="name" size="10" value="#{dataTableBean.name}" required="true"/></td>
+			      <td><h:message for="name" style="color:red"/></td>
+			</tr>
+			<tr>
+			      <td>Department :</td>
+			      <td><h:inputText id="dept" size="20" value="#{dataTableBean.dept}" required="true"/></td>
+			      <td><h:message for="dept" style="color:red"/></td>
+			</tr>
+			<tr>
+			      <td>Age :</td>
+			      <td><h:inputText id="age" size="5" value="#{dataTableBean.age}" required="true"/></td>
+			      <td><h:message for="age" style="color:red"/></td>
+			</tr>
+			<tr>
+			      <td>Salary :</td>
+			      <td><h:inputText id="salary" size="5" value="#{dataTableBean.salary}" required="true"/></td>
+			      <td><h:message for="salary" style="color:red"/></td>
+			</tr>
+			<tr>
+			      <td></td>
+			      <td><h:commandButton value="Add Employee" action="#{dataTableBean.addEmployee}" /></td>
+			</tr>
+		</table>
+	</h:form>
+	</h:panelGroup>
+</h:body> 
+</html>

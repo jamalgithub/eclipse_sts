@@ -1,0 +1,43 @@
+.java-beat-larger-text {
+	font-size: xx-large;
+	font-family: fantasy;
+	font-weight: bolder;
+}
+
+h2{
+	color: red;
+}
+
+h3{
+	color: green;
+}
+
+.employeeTable{   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.employeeTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;  
+   padding:2px;
+}
+
+.employeeTableFooter{
+   text-align:center;
+   //background:none repeat scroll 0 0 white;
+   border-bottom:1px solid #000000; 
+   border-top:1px solid #000000;
+   padding:2px;
+}
+
+.employeeTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.employeeTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
+}

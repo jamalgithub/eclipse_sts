@@ -1,0 +1,41 @@
+table{
+	background-color: white;
+	width: 800px;	
+}
+
+table tr th{
+	background-color: teal;
+	text-align: center;
+	height: 30px;
+	color: white;
+}
+
+table tr td{
+	background-color: #EAE7FF;
+	height: 30px;
+	padding-left: 5px;
+}
+
+a{
+	text-decoration: none;
+}
+
+a img{
+	border: none;
+}
+
+.error {
+    color: #ff0000;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.login{
+	border: 1px solid #eee;
+	width: 250px;
+	padding: 15px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+   <title>JSF tutorial</title>	
+   <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>	   
+</h:head>
+<h:body>
+	<h:outputLink value="../../index.xhtml" >Page d'acceuil</h:outputLink>
+	
+	<h2>valueChangeListener Examples</h2>
+	<h:form>		
+		<h3>Method Binding</h3>
+		<hr/>
+		<h:panelGrid columns="2">
+		   Selected locale :
+		   <h:selectOneMenu value="#{eventsBen.selectedCountry}" onchange="submit()" valueChangeListener="#{eventsBen.localeChanged}" >
+		      <f:selectItems value="#{eventsBen.countries}" />
+		   </h:selectOneMenu>
+		   Country Name: 		 
+		   <h:outputText id="country" value="#{eventsBen.selectedCountry}" size="20" />		
+		</h:panelGrid>
+		
+		<h3>ValueChangeListener interface</h3>
+		<hr/>
+		<h:panelGrid columns="2">
+		   Selected locale :
+		   <h:selectOneMenu value="#{eventsBen.selectedCountry}" onchange="submit()">
+		      <f:valueChangeListener type="com.jamal.jsf.events.MyChangeListener" />
+		      <f:selectItems value="#{eventsBen.countries}" />
+		   </h:selectOneMenu>
+		   Country Name: 		 
+		   <h:outputText id="country1" value="#{eventsBen.selectedCountry}" size="20" />		
+		</h:panelGrid>			
+	</h:form>
+	
+	<h2>actionListener Examples</h2>
+	<h:form>
+		<h3>Method Binding</h3>
+		<hr/>
+		<h:commandButton id="submitButton" value="Submit" action="#{eventsBen.showResult}" actionListener="#{eventsBen.updateData}" />		
+		<h3>ActionListener interface</h3>
+		<hr/>
+		<h:commandButton id="submitButton1" value="Submit" action="#{eventsBen.showResult}" >
+		   <f:actionListener type="com.jamal.jsf.events.MyActionListener" />
+		</h:commandButton>
+	</h:form>
+	
+	<h2>Application Events Examples</h2>
+	<h3>Method Binding (PreRenderViewEvent)</h3>
+    <f:event listener="#{eventsBen.handleEvent}" type="preRenderView" />
+    #{eventsBen.data}
+    
+    <br /><br />
+    <h:form>
+    	<h:commandLink value="Admin page" action="admin" />
+    </h:form>
+    <h3>SystemEventListener interface (PostConstructApplicationEvent, PreDestroyApplicationEvent)</h3>
+    register the system-event-listener class in faces-config.xml
+ </h:body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+	<h:head>
+      <title>JSF tutorial</title>	
+      <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>		
+   </h:head>
+   <h:body>
+   		<h:outputLink value="../../index.xhtml" >Page d'acceuil</h:outputLink>     
+		<h:form>
+			<h2>h:validateLength Example</h2>
+			<h:inputText id="nameInput" value="#{validatorBean.name}" label="name" required="true" >
+			   <f:validateLength minimum="5" maximum="8" />
+			</h:inputText>			
+			<h:message for="nameInput" style="color:red" />	      	   		
+			
+			<h2>h:validateLongRange Example</h2>
+			<h:inputText id="ageInput" value="#{validatorBean.age}" label="age" >
+			   <f:validateLongRange minimum="5" maximum="200" />
+			</h:inputText>			
+			<h:message for="ageInput" style="color:red" />
+			
+			<h2>h:validateDoubleRange Example</h2>
+			<h:inputText id="salaryInput" value="#{validatorBean.salary}" label="salary" >
+			   <f:validateDoubleRange minimum="1000.50" maximum="10000.50" />
+			</h:inputText>
+			<h:message for="salaryInput" style="color:red" />
+			
+			<h2>h:validateRegex Example</h2>
+			<h:inputSecret id="passwordInput" value="#{validatorBean.password}" label="password" redisplay="true" required="true" requiredMessage="pattern incorect">
+			   <f:validateRegex pattern="((?=.*[a-z]).{6,})" />
+			</h:inputSecret>
+			<h:message for="passwordInput" style="color:red" />
+			
+			<h2>Custom Validator Example</h2>
+			<h:inputText id="urlInput" value="#{validatorBean.urlData}" label="URL" required="true">
+			   <f:validator validatorId="com.jamal.jsf.MyValidator" />
+			</h:inputText>
+			<h:message for="urlInput" style="color:red" />
+			
+			<br/><br/>
+			<h:commandButton value="Submit" action="result" />			
+		</h:form>
+	   
+		<h2>Multiple-Components Validator</h2> 
+		<h3>Validation in PostValidateEvent</h3>
+		<h:form id="register"> 
+			<h:message for="RegisterGroupPanel" style="color:red;" /> 
+			<h:panelGrid columns="3" id="RegisterGroupPanel">
+				<!-- register a PostValidateEvent -->
+				<f:event listener="#{validatorBean.validatePassword}" type="postValidate" />
+				
+				<h:outputLabel for="username" value="name : " />
+				<h:inputText id="username" value="#{validatorBean.name}" required="true" requiredMessage="Please enter username" />
+				<h:message for="username" style="color: red;" />
+				
+				<h:outputLabel for="password" value="Password : " />
+				<h:inputSecret id="password" value="#{validatorBean.password}" required="true" requiredMessage="Please enter password"/>
+				<h:message for="password" style="color: red;" />
+				
+				<h:outputLabel for="confirmPassword" value="Confirm password : " />
+				<h:inputSecret id="confirmPassword" required="true" requiredMessage="Please enter confirm password" />
+				<h:message for="confirmPassword" style="color: red;" /> 			
+			</h:panelGrid> 
+			<h:commandButton value="register" /> 
+		</h:form>
+		
+		<h3>Custom Validator - Attribute</h3>
+		<h:form id="register2"> 
+			<h:message for="RegisterGroupPanel2" style="color:red;" /> 
+			<h:panelGrid columns="3" id="RegisterGroupPanel2">			
+				<h:outputLabel for="username2" value="name : " />
+				<h:inputText id="username2" value="#{validatorBean.name}" required="true" requiredMessage="Please enter username" />
+				<h:message for="username2" style="color: red;" />
+				
+				<h:outputLabel for="password2" value="Password : " />
+				<h:inputSecret id="password2" value="#{validatorBean.password}" required="true" requiredMessage="Please enter password">
+					<f:validator validatorId="passwordValidator" />
+					<f:attribute name="confirmPassword2" value="#{confirmPassword2}" />
+				</h:inputSecret>
+				<h:message for="password2" style="color: red;" />
+				
+				<h:outputLabel for="confirmPassword2" value="Confirm password : " />
+				<h:inputSecret id="confirmPassword2" required="true" binding="#{confirmPassword2}" requiredMessage="Please enter confirm password" />
+				<h:message for="confirmPassword2" style="color: red;" /> 			
+			</h:panelGrid> 
+			<h:commandButton value="register" /> 
+		</h:form>	  		
+   </h:body> 
+</html>

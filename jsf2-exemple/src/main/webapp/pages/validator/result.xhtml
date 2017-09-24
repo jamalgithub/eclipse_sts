@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<h:body> 	 	   	   	   	   
+	   <h2>h:validateLength Example</h2>
+	   <h:outputText value="#{validatorBean.name}" />
+	   
+	   <h2>h:validateLongRange Example</h2>
+	   Age:  #{validatorBean.age}
+	   
+	   <h2>h:validateDoubleRange Example</h2>
+	   Salary: #{validatorBean.salary}
+	   
+	   <h2>h:validateRegex Example</h2>
+	   Password: #{validatorBean.password}
+	   
+	   <h2>Custom Validator Example</h2>
+	   <h:outputLink value="#{validatorBean.urlData}" >#{validatorBean.urlData}</h:outputLink>
+	   
+	   <br/><br/>
+	   <h:outputLink value="index.xhtml" title="Back To Home">Back To Home</h:outputLink>
+</h:body> 
+</html>

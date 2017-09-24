@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
+    <ui:define name="chapterItem">
+        <h3 style="margin-top:0">Basic and Advanced Calendar Scenarios</h3>
+        <p:growl id="growl" life="2000" sticky="true"/>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputText value="Basic Selection" />
+            <p:calendar value="#{calendarController.date}" />
+
+			<!-- mode:inline, popup -->
+            <h:outputText value="With Inline Mode" />
+            <p:calendar value="#{calendarController.date}" mode="inline" />
+
+            <h:outputText value="With Paging" />
+            <p:calendar id="paging" value="#{calendarController.date}" pages="3" />
+
+			<!-- showOn:button, focus, both -->
+            <h:outputText value="With Show on" />
+            <p:calendar id="showOn" value="#{calendarController.date}" showOn="button" />
+
+            <h:outputText value="Date Selection with Restricted Date Range" />
+            <p:calendar id="restrictedDates" value="#{calendarController.date}" 
+                        mindate="#{calendarController.yesterday}"
+                        maxdate="#{calendarController.tomorrow}" />
+
+            <h:outputText value="Calendar With Manual Input Disabled" />
+            <p:calendar id="readOnlyInputCalendar" value="#{calendarController.date}" readonlyInput="true" />
+	
+			<!-- effectDuration:slow, normal, fast -->
+			<!-- effect:blind, bounce, clip, drop, fadeIn, fold, show, slide, slideDown -->
+            <h:outputText value="With Effect" />
+            <p:calendar id="effectCalendar" value="#{calendarController.date}" effect="slide" effectDuration="normal" showWeek="true" showOtherMonths="true" />
+
+            <h:outputText value="AJAX update with Calendar" />
+            <p:calendar id="ajaxCalendar" value="#{calendarController.date}">
+                <p:ajax event="dateSelect" listener="#{calendarController.onDateSelect}" update="growl" />
+            </p:calendar>
+			
+			<h:outputText value="Localization of the calendar" />
+            <p:calendar id="arCalendar" value="#{calendarController.date}" locale="ar" navigator="true" />
+            
+            <h:outputText value="Picking Time with Calendar" />
+            <p:calendar id="timeCalendar" value="#{calendarController.date}" pattern="dd/MM/yyyy HH:mm:ss" beforeShowDay="daysToDisabl"/>
+
+        </h:panelGrid>
+    </ui:define>
+    <ui:define name="appResources">
+        <h:outputScript library="js" name="chapter3/chapter3.js" />
+    </ui:define>
+</ui:composition>

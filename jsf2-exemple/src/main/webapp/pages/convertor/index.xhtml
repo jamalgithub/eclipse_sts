@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+	<h:head>
+      <title>JSF tutorial</title>
+      <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>			
+   </h:head>
+   <h:body>       
+	   <h:form>
+	   		<h2>ConvertNumber example</h2>
+			<h:panelGrid columns="3">
+				Amount : 
+				<h:inputText id="amount" value="#{convertorBean.amount}" size="20" required="true" label="Amount" >
+					<!-- display in at least 2 decimal points -->
+					<f:convertNumber minFractionDigits="2" />
+				</h:inputText>
+				<h:message for="amount" style="color:red" />
+			</h:panelGrid>
+			
+			<h2>ConvertDateTime Example</h2>
+			<h:inputText id="dateInput" value="#{convertorBean.date}" label="Date" required="true">
+		      	<f:convertDateTime pattern="dd-mm-yyyy" />
+		   	</h:inputText>		   				
+			<h:outputText value="(12-01-2012)" />
+			<h:message for="dateInput" style="color:red" />
+			
+			<h2>Custom Converter Example</h2>
+			<h:inputText id="urlInput" value="#{convertorBean.urlData}" label="URL" required="true">
+			   <f:converter converterId="com.jamal.jsf.converter.MyConverter" />
+			</h:inputText>		 
+			<h:commandButton value="submit" action="result"/>
+			<h:message for="urlInput" style="color:red" />	
+				
+			<br/><br/>
+			<h:commandButton value="Submit" action="result" />
+			<h:outputLink value="../../index.xhtml" >Page d'acceuil</h:outputLink>
+	   </h:form>	  		
+   </h:body> 
+</html>

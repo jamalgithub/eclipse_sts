@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">	
+	<application>
+		<locale-config>
+	         <default-locale>fr</default-locale>
+	         <supported-locale>en</supported-locale>         
+	      </locale-config>
+		<resource-bundle>
+			<base-name>com.jamal.jsf.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		
+		<!-- Application Startup -->
+		<system-event-listener>
+		   <system-event-listener-class>
+		      com.jamal.jsf.events.MySystemEventListener
+		   </system-event-listener-class>
+		   <system-event-class>
+		      javax.faces.event.PostConstructApplicationEvent
+		   </system-event-class>    					
+		</system-event-listener>
+		<!-- Before Application is to shut down -->
+		<system-event-listener>
+		   <system-event-listener-class>
+		      com.jamal.jsf.events.MySystemEventListener
+		   </system-event-listener-class>
+		   <system-event-class>
+		      javax.faces.event.PreDestroyApplicationEvent
+		   </system-event-class>    					
+		</system-event-listener>
+	</application>
+	
+	<navigation-rule>
+	   <from-view-id>/pages/navigation/home.xhtml</from-view-id>
+	   <navigation-case>
+	      <from-action>#{navigationController.processPage1}</from-action>
+	      <from-outcome>page</from-outcome>
+	      <to-view-id>/pages/navigation/page1.jsf</to-view-id>
+	   </navigation-case>
+	   <navigation-case>
+	      <from-action>#{navigationController.processPage2}</from-action>
+	      <from-outcome>page</from-outcome>
+	      <to-view-id>/pages/navigation/page2.jsf</to-view-id>
+	   </navigation-case>
+	</navigation-rule>
+	
+</faces-config>

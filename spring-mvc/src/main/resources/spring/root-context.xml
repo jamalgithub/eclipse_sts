@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:component-scan base-package="np.com.mshrestha.bookstore" />
+
+	<beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" 
+		p:location="classpath:database.properties"
+	/>		
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" 
+		p:driverClassName="${database.driver}"
+		p:url="${database.url}"
+		p:username="${database.user}"
+		p:password="${database.password}" 
+	/>
+
+	<util:properties id="hjProperties">
+		<beans:prop key="hibernate.dialect">${hibernate.dialect}</beans:prop>
+		<beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>
+		<beans:prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</beans:prop>
+	</util:properties>
+		
+	<!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:packagesToScan="np.com.mshrestha.bookstore.model"
+		p:hibernateProperties-ref="hjProperties"
+	/> -->
+
+	<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:packagesToScan="np.com.mshrestha.bookstore.model"		
+		p:persistenceProviderClass="org.hibernate.ejb.HibernatePersistence"
+		p:jpaProperties-ref="hjProperties"
+	/>
+
+	<!-- <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"
+	/> -->	
+
+	<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory" 		
+	/>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans:beans>
